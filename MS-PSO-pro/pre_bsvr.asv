@@ -1,0 +1,38 @@
+clear all;
+color=[[0 0 139]/255;[192 0 0]/255;[255 140 0]/255;[0 191 255]/255];
+Data2=xlsread('1.xlsx','Sheet3');
+test_error=[6];
+factor=4;
+%error_list=string_name;
+x=Data2(:,1:factor);
+y=Data2(:, factor+test_error);
+[x,settings1]=mapminmax(x',0,1);
+[y,settings2]=mapminmax(y',0,1);
+input=x';
+output=y';
+rng('default') % For reproducibility
+d=size(input,2);
+Hyperparameters=([100  1.*ones(1,d)]);               %Initial values of Hyper-parameters
+lb=([1     0.0001.*ones(1,d)]);                      %lower bound of Hyper-parameters
+ub=([10^7  1000.*ones(1,d)]);                        %upper bound of Hyper-parameters
+model= SVRmodel(input,output,Hyperparameters,lb,ub);
+%Y=SVRPredict([0,0,0,0],model)
+% 配置参数
+dim = 4;  % 维度，设置为4D
+lower_bounds = zeros(1, dim);  % 搜索空间的下界
+upper_bounds = ones(1, dim);  % 搜索空间的上界
+bounds = [lower_bounds; upper_bounds]';  % 组合上下界
+
+% **********************入参*************
+num_samples = 80;  % 每个区域随机抽取的样本数量（增加以确保覆盖度）
+iterations = 5;  % 迭代次数（增加以提高优化效果）
+elitism_size = 10;  % 精英策略中选择的精英数量
+% ************end*********************
+% 定义每个维度的窗口大小边界
+window_size_bounds = zeros(dim, 2);
+for d = 1:dim
+    window_size_bounds(d, :) = [(upper_bounds(d) - lower_bounds(d)) * 0.1, ...
+                                (upper_bounds(d) - lower_bounds(d)) * 0.5];
+end
+
+mopso_adaptive_elitism_crowding(dim, bounds, window_size_bounds, model, 80, iterations, num_samples, elitism_size);

@@ -1,0 +1,136 @@
+{
+  "figure_purpose": "ICDE 2027 Crimes case-study diagnostic visualization",
+  "seed": 172,
+  "seed_selection": "Predeclared diagnostic seed retained from earlier spatial plots; not selected for these new figures",
+  "finalized_seeds": [
+    34,
+    46,
+    77,
+    136,
+    160,
+    172,
+    180,
+    2159,
+    6790,
+    7416
+  ],
+  "finalized_seed_selection": "Post-hoc selected ten of thirteen seeds; see final experiment record",
+  "methods": [
+    {
+      "key": "KARMA",
+      "source_method": "KARMA",
+      "label": "KARMA (final)†",
+      "group": "Dual-channel knowledge + ROI arbitration",
+      "variant": "oracle2022_hotspot_highside_adjacent",
+      "color": "#D55E00"
+    },
+    {
+      "key": "C1",
+      "source_method": "C1",
+      "label": "C1: Maximin-LHS",
+      "group": "Space-filling, no feedback",
+      "variant": "hotspot",
+      "color": "#009E73"
+    },
+    {
+      "key": "C2",
+      "source_method": "C2",
+      "label": "C2: N-MeanMSE",
+      "group": "Global pointwise uncertainty",
+      "variant": "hotspot",
+      "color": "#0072B2"
+    },
+    {
+      "key": "C10",
+      "source_method": "C10",
+      "label": "C10: Voronoi-MixedMetric",
+      "group": "Data-driven regional sampling",
+      "variant": "hotspot",
+      "color": "#56B4E9"
+    },
+    {
+      "key": "ROI-D",
+      "source_method": "ROI-D",
+      "label": "ROI-D",
+      "group": "Same-framework no-knowledge ablation",
+      "variant": "hotspot",
+      "color": "#E69F00"
+    },
+    {
+      "key": "C7",
+      "source_method": "C7",
+      "label": "C7: πBO-ROI",
+      "group": "Pointwise fixed prior inside data ROI",
+      "variant": "hotspot",
+      "color": "#CC79A7"
+    }
+  ],
+  "final_training_size": 50,
+  "initial_samples": 30,
+  "acquired_samples": 20,
+  "valid_grid_cells": 659,
+  "grid": "1km",
+  "cell_area_km2": 1.0,
+  "units_source": "data/units/units_2022_1km_hotspot.csv",
+  "knowledge_sources": {
+    "hotspot": "data/knowledge/knowledge_2021_1km_hotspot.csv",
+    "oracle2022_hotspot_highside_adjacent": "data/knowledge/knowledge_2022_1km_hotspot_oracle.csv; pi_bnd = pi_bnd_highside_adjacent_2022"
+  },
+  "source_paths_by_method": {
+    "KARMA": {
+      "history": "results\\formal\\1km_budget50_random_holdout_hotspot_oracle2022_highside_adjacent\\KARMA\\fold_0\\seed_172\\history.json",
+      "recommendation": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot_oracle2022_highside_adjacent\\KARMA\\fold_0\\seed_172\\valid_recommendation.json",
+      "set_metrics": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot_oracle2022_highside_adjacent\\KARMA\\fold_0\\seed_172\\set_metrics.json"
+    },
+    "C1": {
+      "history": "results\\formal\\1km_budget50_random_holdout_hotspot\\C1\\fold_0\\seed_172\\history.json",
+      "recommendation": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\C1\\fold_0\\seed_172\\valid_recommendation.json",
+      "set_metrics": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\C1\\fold_0\\seed_172\\set_metrics.json"
+    },
+    "C2": {
+      "history": "results\\formal\\1km_budget50_random_holdout_hotspot\\C2\\fold_0\\seed_172\\history.json",
+      "recommendation": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\C2\\fold_0\\seed_172\\valid_recommendation.json",
+      "set_metrics": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\C2\\fold_0\\seed_172\\set_metrics.json"
+    },
+    "C10": {
+      "history": "results\\formal\\1km_budget50_random_holdout_hotspot\\C10\\fold_0\\seed_172\\history.json",
+      "recommendation": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\C10\\fold_0\\seed_172\\valid_recommendation.json",
+      "set_metrics": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\C10\\fold_0\\seed_172\\set_metrics.json"
+    },
+    "ROI-D": {
+      "history": "results\\formal\\1km_budget50_random_holdout_hotspot\\ROI-D\\fold_0\\seed_172\\history.json",
+      "recommendation": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\ROI-D\\fold_0\\seed_172\\valid_recommendation.json",
+      "set_metrics": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\ROI-D\\fold_0\\seed_172\\set_metrics.json"
+    },
+    "C7": {
+      "history": "results\\formal\\1km_budget50_random_holdout_hotspot\\C7\\fold_0\\seed_172\\history.json",
+      "recommendation": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\C7\\fold_0\\seed_172\\valid_recommendation.json",
+      "set_metrics": "results\\valid_region_metrics\\1km_budget50_random_holdout_hotspot\\C7\\fold_0\\seed_172\\set_metrics.json"
+    }
+  },
+  "per_run_source": "results/final_10seed_karma2022/final_per_run_metrics.csv",
+  "summary_source": "results/final_10seed_karma2022/final_summary.csv",
+  "density_color_cap_pooled_99th_percentile": 3208.634359963579,
+  "density_color_pool": "Observed and predicted densities for all six methods at seed 172",
+  "density_values_above_cap_are_not_removed": true,
+  "observed_density": "expm1(y1_log1p) / cell_area_km2",
+  "predicted_density": "(exp(mu_z + var_z/2) - 1) / cell_area_km2",
+  "recommendation_target": "Total-intensity GSO strictly inside valid-grid union",
+  "uncertainty": "Population standard deviation (ddof=0) across ten seed-level runs",
+  "raw_observations": "All ten per-seed values are shown as open points with fixed seed-ordered offsets",
+  "spatial_alt_text": "Twelve-panel spatial comparison. For each of six methods, the MMRGP prediction with 50 samples and four red regions is paired with the observed 2022 density under the same regions. A shared density scale enables direct comparison.",
+  "metrics_alt_text": "Four bar charts compare RegionPass, Conditional RegionPass, DensityLift and TopN precision for six methods. Every panel includes ten individual seed results and population-SD error bars; final KARMA has the highest mean CRP, DensityLift and TopN, and ties C10 on RegionPass.",
+  "leakage_caveat": "Final KARMA uses 2022 target-year labels in its classification prior; results are diagnostic and not a leakage-free deployable ranking",
+  "software": {
+    "python": "3.9.10",
+    "matplotlib": "3.9.4",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3"
+  },
+  "figures": [
+    "results\\figures\\final_karma_representatives_seed172\\spatial_comparison_seed172.png",
+    "results\\figures\\final_karma_representatives_seed172\\spatial_comparison_seed172.pdf",
+    "results\\figures\\final_karma_representatives_seed172\\region_metrics_10seeds.png",
+    "results\\figures\\final_karma_representatives_seed172\\region_metrics_10seeds.pdf"
+  ]
+}

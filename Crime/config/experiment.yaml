@@ -1,0 +1,60 @@
+version: 1
+created: '2026-10-25'
+protocol:
+  knowledge_year: 2021
+  target_year: 2022
+  initial_budget: 30
+  sequential_steps: 20
+  total_budget: 50
+  folds: [0]
+  split_scheme: random_holdout
+  test_fraction: 0.2
+  seeds: [172, 136, 34, 46, 77, 160, 91, 158, 180, 1]
+  training_responses: [y1_log1p, y2]
+  class_pos: [1, 2]
+  continuous_and_residual_kernel: correxp
+  classification_latent_kernel: covSEard
+  random_test_only_for_surrogate_quality: true
+  incomplete_run_policy: resume_matlab_checkpoint_else_restart_from_paired_initial_design
+  completed_run_policy: skip
+  formal_surrogate_fallback: forbidden
+evaluation_budgets: [30, 50]
+grids:
+  1km:
+    units: data/units/units_2022_1km.csv
+    knowledge: data/knowledge/knowledge_2021_1km.csv
+    cell_area_km2: 1.0
+  0.5km:
+    units: data/units/units_2022_0.5km.csv
+    knowledge: data/knowledge/knowledge_2021_0.5km.csv
+    cell_area_km2: 0.25
+sur_reference:
+  type: scrambled_sobol
+  points: 256
+  seed: 20261024
+recommendation:
+  implementation: region_recommender.RecommendationConfig
+  k: 4
+  c: 4.0
+  epsilon: 1.0e-12
+  length_min: 0.01
+  length_max: 0.15
+  n_sobol: 512
+  sobol_seed: 20261024
+  particles: 100
+  iterations: 100
+  seed_rule: seed_plus_1000_fold_plus_budget
+region_evaluation:
+  n_reference: 2000
+  seed: 20261024
+  quantile: 0.75
+  quantile_method: linear
+  pass_rule: recommended_count_strictly_above_matched_reference_q3
+  incidents: data/processed/incidents_2022_clean.csv.gz
+methods:
+  core: [C1, C2, C12, C10, ROI-D, C6, C7, KARMA]
+  optional: [C3, C4, C5, C9, C11]
+aggregation:
+  within_seed: single_random_holdout_run
+  across_seeds: mean_and_population_std_over_seed_results
+  sequential_auc_steps: 20

@@ -1,0 +1,64 @@
+version: 1
+created: '2026-10-24'
+years:
+  knowledge: 2021
+  target: 2022
+raw:
+  2021: data/raw/Crimes_-_2021_20231019.tsv
+  2022: data/raw/Crimes_-_2022_20231019.tsv
+cleaning:
+  latitude_min: 41.60
+  latitude_max: 42.05
+  longitude_min: -87.95
+  longitude_max: -87.52
+  require_coordinates: true
+violent_primary_types:
+  - HOMICIDE
+  - CRIMINAL SEXUAL ASSAULT
+  - ROBBERY
+  - BATTERY
+  - ASSAULT
+grid:
+  main_size_km: 1.0
+  sensitivity_sizes_km: [0.5]
+  origin_latitude: 41.60
+  origin_longitude: -87.95
+  km_per_degree_latitude: 111.32
+  projection_reference_latitude: 41.8
+  annual_occupied_cells_only: true
+responses:
+  continuous: annual_incident_count
+  continuous_model_transform: log1p
+  classification: violent_ratio_above_2021_cell_median
+  classification_threshold_source: 2021_cells_same_grid_scale
+  legacy_a1_retained_for_audit: true
+  smoothing:
+    enabled_for_sensitivity_only: true
+    kappas: [20, 50]
+    prior_probability_source: 2021_city_incident_violent_rate
+ground_truth:
+  high_crime_rule: y1_strictly_above_target_year_Q3
+  classification_boundary_rule: any_4_neighbor_has_different_y2
+  high_crime_components: 4_neighbor_connectivity
+spatial_blocks:
+  n_blocks: 5
+  method: kmeans2_on_2022_cell_centers
+  seed: 20261024
+knowledge:
+  source_year: 2021
+  pi_hg:
+    quantity: normalized_gradient_of_masked_gaussian_smoothed_log1p_count
+    gaussian_sigma_cells: 1.0
+    normalization_quantile: 0.95
+    floor: 0.01
+  pi_bnd:
+    quantity: gaussian_band_around_2021_cell_median_violent_ratio
+    tau_rule: max_1.4826_MAD_of_2021_ratio_and_0.05
+    floor: 0.01
+  continuous_interpolation: nearest_outside_support_linear_inside_when_used
+outputs:
+  processed_incidents: compressed_csv
+  units: csv_and_mat
+  ground_truth: csv
+  knowledge: csv_npz_and_mat
+  summary: json

@@ -1,0 +1,274 @@
+{
+  "config": {
+    "version": 1,
+    "created": "2026-10-24",
+    "years": {
+      "knowledge": 2021,
+      "target": 2022
+    },
+    "raw": {
+      "2021": "data/raw/Crimes_-_2021_20231019.tsv",
+      "2022": "data/raw/Crimes_-_2022_20231019.tsv"
+    },
+    "cleaning": {
+      "latitude_min": 41.6,
+      "latitude_max": 42.05,
+      "longitude_min": -87.95,
+      "longitude_max": -87.52,
+      "require_coordinates": true
+    },
+    "violent_primary_types": [
+      "HOMICIDE",
+      "CRIMINAL SEXUAL ASSAULT",
+      "ROBBERY",
+      "BATTERY",
+      "ASSAULT"
+    ],
+    "grid": {
+      "main_size_km": 1.0,
+      "sensitivity_sizes_km": [
+        0.5
+      ],
+      "origin_latitude": 41.6,
+      "origin_longitude": -87.95,
+      "km_per_degree_latitude": 111.32,
+      "projection_reference_latitude": 41.8,
+      "annual_occupied_cells_only": true
+    },
+    "responses": {
+      "continuous": "annual_incident_count",
+      "continuous_model_transform": "log1p",
+      "classification": "violent_ratio_above_2021_cell_median",
+      "classification_threshold_source": "2021_cells_same_grid_scale",
+      "legacy_a1_retained_for_audit": true,
+      "smoothing": {
+        "enabled_for_sensitivity_only": true,
+        "kappas": [
+          20,
+          50
+        ],
+        "prior_probability_source": "2021_city_incident_violent_rate"
+      }
+    },
+    "ground_truth": {
+      "high_crime_rule": "y1_strictly_above_target_year_Q3",
+      "classification_boundary_rule": "any_4_neighbor_has_different_y2",
+      "high_crime_components": "4_neighbor_connectivity"
+    },
+    "spatial_blocks": {
+      "n_blocks": 5,
+      "method": "kmeans2_on_2022_cell_centers",
+      "seed": 20261024
+    },
+    "knowledge": {
+      "source_year": 2021,
+      "pi_hg": {
+        "quantity": "normalized_gradient_of_masked_gaussian_smoothed_log1p_count",
+        "gaussian_sigma_cells": 1.0,
+        "normalization_quantile": 0.95,
+        "floor": 0.01
+      },
+      "pi_bnd": {
+        "quantity": "gaussian_band_around_2021_cell_median_violent_ratio",
+        "tau_rule": "max_1.4826_MAD_of_2021_ratio_and_0.05",
+        "floor": 0.01
+      },
+      "continuous_interpolation": "nearest_outside_support_linear_inside_when_used"
+    },
+    "outputs": {
+      "processed_incidents": "compressed_csv",
+      "units": "csv_and_mat",
+      "ground_truth": "csv",
+      "knowledge": "csv_npz_and_mat",
+      "summary": "json"
+    }
+  },
+  "years": {
+    "2021": {
+      "raw_file": "data\\raw\\Crimes_-_2021_20231019.tsv",
+      "raw_sha256": "dcdb1c592e1cf635bcbe12bf0893f5fea4d9397e6a6450203d611957ad17efd2",
+      "raw_rows": 208910,
+      "valid_rows": 202870,
+      "removed_rows": 6040,
+      "coordinate_missing_rows": 6040,
+      "out_of_bbox_with_coordinates": 0,
+      "violent_rows": 70675,
+      "violent_share": 0.3483758071671514,
+      "processed_file": "data\\processed\\incidents_2021_clean.csv.gz"
+    },
+    "2022": {
+      "raw_file": "data\\raw\\Crimes_-_2022_20231019.tsv",
+      "raw_sha256": "12d237af06e0d974b66c978a00e5e4121da157181cd71d9eba2cdc626f5617ff",
+      "raw_rows": 238995,
+      "valid_rows": 233049,
+      "removed_rows": 5946,
+      "coordinate_missing_rows": 5944,
+      "out_of_bbox_with_coordinates": 2,
+      "violent_rows": 72532,
+      "violent_share": 0.3112306853923424,
+      "processed_file": "data\\processed\\incidents_2022_clean.csv.gz"
+    }
+  },
+  "scales": {
+    "1km": {
+      "classification_threshold": 0.3333333333333333,
+      "high_crime_q3_2021": 445.0,
+      "high_crime_q3_2022": 504.0,
+      "high_crime_components_2022": 10,
+      "spatial_block_sizes_2022": {
+        "0": 153,
+        "1": 132,
+        "2": 169,
+        "3": 107,
+        "4": 98
+      },
+      "knowledge": {
+        "gaussian_sigma_cells": 1.0,
+        "gradient_normalizer_q95": 0.9081407273541021,
+        "classification_threshold": 0.3333333333333333,
+        "tau": 0.09194418604651163,
+        "pi_hg_mean": 0.43304422428153205,
+        "pi_bnd_mean": 0.6802709492422,
+        "pi_hg_nonflat_fraction": 0.9832572298325722,
+        "pi_bnd_nonflat_fraction": 0.9254185692541856
+      },
+      "files": {
+        "units": [
+          "data\\units\\units_2021_1km.csv",
+          "data\\units\\units_2022_1km.csv"
+        ],
+        "ground_truth": "data\\groundtruth\\groundtruth_2022_1km.csv",
+        "knowledge": "data\\knowledge\\knowledge_2021_1km.csv",
+        "knowledge_grid": "data\\knowledge\\knowledge_grid_2021_1km.npz",
+        "matlab_bundle": "data\\units\\crimes_mixed_1km.mat"
+      },
+      "2021": {
+        "occupied_cells": 657,
+        "y1_min_median_max": [
+          1,
+          224.0,
+          2319
+        ],
+        "cells_below_10_incidents": 53,
+        "q3_key_cells": 164,
+        "y2_positive_cells": 323,
+        "y2_positive_share": 0.4916286149162861,
+        "y2_a1_legacy_positive_share": 0.030441400304414,
+        "y2_city_rate_legacy_positive_share": 0.4277016742770167,
+        "spatial_block_sizes": {
+          "0": 152,
+          "1": 129,
+          "2": 167,
+          "3": 109,
+          "4": 100
+        },
+        "y2_smooth_k20_positive_share": 0.4992389649923896,
+        "y2_smooth_k50_positive_share": 0.4992389649923896
+      },
+      "2022": {
+        "occupied_cells": 659,
+        "y1_min_median_max": [
+          1,
+          277.0,
+          3356
+        ],
+        "cells_below_10_incidents": 54,
+        "q3_key_cells": 165,
+        "y2_positive_cells": 226,
+        "y2_positive_share": 0.34294385432473445,
+        "y2_a1_legacy_positive_share": 0.018209408194233688,
+        "y2_city_rate_legacy_positive_share": 0.2822458270106222,
+        "spatial_block_sizes": {
+          "0": 153,
+          "1": 132,
+          "2": 169,
+          "3": 107,
+          "4": 98
+        },
+        "y2_smooth_k20_positive_share": 0.3566009104704097,
+        "y2_smooth_k50_positive_share": 0.3535660091047041
+      },
+      "classification_boundary_cells_2022": 372
+    },
+    "0.5km": {
+      "classification_threshold": 0.3291078305519898,
+      "high_crime_q3_2021": 122.0,
+      "high_crime_q3_2022": 141.0,
+      "high_crime_components_2022": 66,
+      "spatial_block_sizes_2022": {
+        "0": 657,
+        "1": 120,
+        "2": 646,
+        "3": 383,
+        "4": 486
+      },
+      "knowledge": {
+        "gaussian_sigma_cells": 1.0,
+        "gradient_normalizer_q95": 1.5374686881684876,
+        "classification_threshold": 0.3291078305519898,
+        "tau": 0.11763374450812701,
+        "pi_hg_mean": 0.41266495270928816,
+        "pi_bnd_mean": 0.6815425110240889,
+        "pi_hg_nonflat_fraction": 0.9807355516637478,
+        "pi_bnd_nonflat_fraction": 0.9229422066549913
+      },
+      "files": {
+        "units": [
+          "data\\units\\units_2021_0.5km.csv",
+          "data\\units\\units_2022_0.5km.csv"
+        ],
+        "ground_truth": "data\\groundtruth\\groundtruth_2022_0.5km.csv",
+        "knowledge": "data\\knowledge\\knowledge_2021_0.5km.csv",
+        "knowledge_grid": "data\\knowledge\\knowledge_grid_2021_0.5km.npz",
+        "matlab_bundle": "data\\units\\crimes_mixed_0.5km.mat"
+      },
+      "2021": {
+        "occupied_cells": 2284,
+        "y1_min_median_max": [
+          1,
+          62.0,
+          969
+        ],
+        "cells_below_10_incidents": 309,
+        "q3_key_cells": 569,
+        "y2_positive_cells": 1142,
+        "y2_positive_share": 0.5,
+        "y2_a1_legacy_positive_share": 0.04816112084063047,
+        "y2_city_rate_legacy_positive_share": 0.43257443082311736,
+        "spatial_block_sizes": {
+          "0": 642,
+          "1": 135,
+          "2": 645,
+          "3": 385,
+          "4": 477
+        },
+        "y2_smooth_k20_positive_share": 0.5,
+        "y2_smooth_k50_positive_share": 0.48117338003502624
+      },
+      "2022": {
+        "occupied_cells": 2292,
+        "y1_min_median_max": [
+          1,
+          73.0,
+          1270
+        ],
+        "cells_below_10_incidents": 279,
+        "q3_key_cells": 565,
+        "y2_positive_cells": 907,
+        "y2_positive_share": 0.3957242582897033,
+        "y2_a1_legacy_positive_share": 0.03926701570680628,
+        "y2_city_rate_legacy_positive_share": 0.3267888307155323,
+        "spatial_block_sizes": {
+          "0": 657,
+          "1": 120,
+          "2": 646,
+          "3": 383,
+          "4": 486
+        },
+        "y2_smooth_k20_positive_share": 0.3957242582897033,
+        "y2_smooth_k50_positive_share": 0.3717277486910995
+      },
+      "classification_boundary_cells_2022": 1582
+    }
+  }
+}

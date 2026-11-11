@@ -1,0 +1,4 @@
+.mimosa/
+__pycache__/
+*.log
+*.bak*

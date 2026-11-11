@@ -1,0 +1,59 @@
+{
+  "seed": 7416,
+  "seed_choice": "Illustrative final seed selected for strong aligned-arm and weak fixed-misleading-arm regional metrics; not an average result.",
+  "methods": [
+    "KARMA-Aligned",
+    "KARMA-Misleading-Adaptive",
+    "KARMA-Misleading-Fixed",
+    "ROI-D"
+  ],
+  "final_training_size": 50,
+  "initial_samples": 30,
+  "acquired_samples": 20,
+  "source_data": [
+    "data/units/units_2022_1km_hotspot.csv",
+    "data/knowledge/knowledge_2022_1km_hotspot_oracle.csv",
+    "results/final_10seed_rotated180_ablation/ablation_per_run_metrics.csv",
+    "formal histories and valid recommendations collected by finalize_rotated180_ablation_10seed.collect_runs"
+  ],
+  "region_background": "Observed 2022 y1 incident count per occupied 1 km cell; identical for all four arms.",
+  "density_color_cap_99th_percentile": 1556.219999999992,
+  "density_values_above_cap": "Retained in data and drawn at the cap color; not removed.",
+  "prior_fields": [
+    "pi_bnd_highside_adjacent_2022",
+    "pi_bnd_highside_rotated180_2022"
+  ],
+  "prior_scale": [
+    0,
+    1
+  ],
+  "prior_diagnostics": {
+    "diagnostic_rows": 649,
+    "top20_rows": 130,
+    "aligned_pearson_y1": 0.6410109217187783,
+    "aligned_pearson_y2": 0.7552453322402761,
+    "aligned_top20_mean_y1": 6.425138908037407,
+    "aligned_top20_mean_y2": 0.8307692307692308,
+    "rotated180_pearson_y1": -0.09979246753069748,
+    "rotated180_pearson_y2": -0.15448638404059126,
+    "rotated180_top20_mean_y1": 4.774519353629973,
+    "rotated180_top20_mean_y2": 0.15384615384615385,
+    "all_mean_y1": 5.211130777570131,
+    "all_mean_y2": 0.3050847457627119
+  },
+  "missing_data": "Unoccupied cells are blank; no interpolation or zero imputation in the figures.",
+  "model_refit_or_sampling_rerun": false,
+  "figures": [
+    "results\\figures\\rotated180_ablation_spatial\\four_arm_regions_seed7416.png",
+    "results\\figures\\rotated180_ablation_spatial\\karma_aligned_regions_seed7416.png",
+    "results\\figures\\rotated180_ablation_spatial\\rotated_adaptive_regions_seed7416.png",
+    "results\\figures\\rotated180_ablation_spatial\\rotated_fixed_regions_seed7416.png",
+    "results\\figures\\rotated180_ablation_spatial\\roi_d_regions_seed7416.png",
+    "results\\figures\\rotated180_ablation_spatial\\aligned_vs_rotated180_priors.png",
+    "results\\figures\\rotated180_ablation_spatial\\aligned_correct_prior.png",
+    "results\\figures\\rotated180_ablation_spatial\\rotated180_misleading_prior.png"
+  ],
+  "matplotlib_version": "3.9.4",
+  "pandas_version": "2.3.3",
+  "dpi": 220
+}

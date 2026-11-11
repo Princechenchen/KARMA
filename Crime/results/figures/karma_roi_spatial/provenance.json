@@ -1,0 +1,22 @@
+{
+  "seed": 172,
+  "methods": [
+    "KARMA",
+    "ROI-D"
+  ],
+  "final_training_size": 50,
+  "initial_samples": 30,
+  "acquired_samples": 20,
+  "grid": "1km",
+  "cell_area_km2": 1.0,
+  "density_color_cap_pooled_99th_percentile": 2223.397479446624,
+  "density_values_above_cap_are_not_removed": true,
+  "observed_density": "expm1(y1_log1p) / cell_area_km2",
+  "predicted_density": "(exp(mu_z + var_z/2) - 1) / cell_area_km2",
+  "recommendation_target": "original total-intensity GSO",
+  "figures": [
+    "F:\\学习工作\\搞点研究\\投论文\\融合物理信息的区域采样\\crimes-mixed-response\\results\\figures\\karma_roi_spatial\\KARMA_seed172_spatial.png",
+    "F:\\学习工作\\搞点研究\\投论文\\融合物理信息的区域采样\\crimes-mixed-response\\results\\figures\\karma_roi_spatial\\ROI-D_seed172_spatial.png"
+  ],
+  "note": "One predeclared formal seed for visual diagnosis; not an eight-seed average."
+}

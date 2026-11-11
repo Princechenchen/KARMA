@@ -1,0 +1,44 @@
+% function [ y, lb, ub,x, M ] = Branin_2d() %竞赛用
+% addpath('help_functions') 
+% addpath('TPLHD')
+% 
+% n = 2;
+% lb = [-5;0];        % lower bound
+% ub = [10;15]; 
+% 
+% 
+% % Initial samples
+% x = scaled_TPLHD(10,lb,ub);  
+% 
+% M = @(xx) Branin_function(xx);
+% 
+% y = zeros(size(x,1),1);
+% for i=1:size(x,1)
+%     y(i,1) = M(x(i,:));
+% end
+% 
+% 
+% [-5,10][0,15]
+% end
+
+function [y] = Branin_2d3(xx)
+
+
+x1 = xx(:,1)*15-5; %[-5,10]
+x2 = xx(:,2)*15;   %[0,15]
+
+
+a = 1;
+b = 5.1 ./ (4.*pi.^2);
+c = 5 ./ pi;
+r = 6;
+s = 10;
+t = 1 ./ (8.*pi);
+term1 = a .* (x2 - b.*x1.^2 + c.*x1 - r).^2;
+term2 = s.*((1-t).*cos(x1)+1);
+term3 = (x1+5)./3;
+y = term1 + term2 + term3;
+end
+
+
+

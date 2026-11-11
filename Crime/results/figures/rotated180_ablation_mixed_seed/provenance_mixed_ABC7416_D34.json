@@ -1,0 +1,39 @@
+{
+  "method_seeds": {
+    "KARMA-Aligned": 7416,
+    "KARMA-Misleading-Adaptive": 7416,
+    "KARMA-Misleading-Fixed": 7416,
+    "ROI-D": 34
+  },
+  "selection": "User-specified mixed-seed illustration: A/B/C=7416, D=34.",
+  "comparison_status": "Not a paired same-split comparison; do not use as a standalone fairness ranking.",
+  "methods": [
+    "KARMA-Aligned",
+    "KARMA-Misleading-Adaptive",
+    "KARMA-Misleading-Fixed",
+    "ROI-D"
+  ],
+  "final_training_size": 50,
+  "initial_samples": 30,
+  "acquired_samples": 20,
+  "source_data": [
+    "data/units/units_2022_1km_hotspot.csv",
+    "results/final_10seed_rotated180_ablation/ablation_per_run_metrics.csv",
+    "formal histories and valid recommendations collected by finalize_rotated180_ablation_10seed.collect_runs"
+  ],
+  "region_background": "Observed 2022 y1 incident count per occupied 1 km cell; identical for all panels.",
+  "density_color_cap_99th_percentile": 1556.219999999992,
+  "density_values_above_cap": "Retained and drawn at the cap color; not removed.",
+  "missing_data": "Unoccupied cells are blank; no interpolation or zero imputation.",
+  "model_refit_or_sampling_rerun": false,
+  "figures": [
+    "results\\figures\\rotated180_ablation_mixed_seed\\four_arm_regions_mixed_ABC7416_D34.png",
+    "results\\figures\\rotated180_ablation_mixed_seed\\karma_aligned_regions_seed7416.png",
+    "results\\figures\\rotated180_ablation_mixed_seed\\rotated_adaptive_regions_seed7416.png",
+    "results\\figures\\rotated180_ablation_mixed_seed\\rotated_fixed_regions_seed7416.png",
+    "results\\figures\\rotated180_ablation_mixed_seed\\roi_d_regions_seed34.png"
+  ],
+  "matplotlib_version": "3.9.2",
+  "pandas_version": "2.2.2",
+  "dpi": 220
+}

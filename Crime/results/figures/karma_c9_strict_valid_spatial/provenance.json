@@ -1,0 +1,25 @@
+{
+  "seed": 172,
+  "methods": [
+    "KARMA",
+    "C9",
+    "C10"
+  ],
+  "final_training_size": 50,
+  "initial_samples": 30,
+  "acquired_samples": 20,
+  "grid": "1km",
+  "cell_area_km2": 1.0,
+  "density_color_cap_pooled_99th_percentile": 1979.0000000000002,
+  "density_values_above_cap_are_not_removed": true,
+  "observed_density": "expm1(y1_log1p) / cell_area_km2",
+  "predicted_density": "(exp(mu_z + var_z/2) - 1) / cell_area_km2",
+  "recommendation_target": "total-intensity GSO strictly inside valid grid union",
+  "recommendation_source": "F:\\学习工作\\搞点研究\\投论文\\融合物理信息的区域采样\\crimes-mixed-response\\results\\valid_region_metrics\\1km_budget50_random_holdout",
+  "figures": [
+    "F:\\学习工作\\搞点研究\\投论文\\融合物理信息的区域采样\\crimes-mixed-response\\results\\figures\\karma_c9_strict_valid_spatial\\KARMA_seed172_strict_valid_spatial.png",
+    "F:\\学习工作\\搞点研究\\投论文\\融合物理信息的区域采样\\crimes-mixed-response\\results\\figures\\karma_c9_strict_valid_spatial\\C9_seed172_strict_valid_spatial.png",
+    "F:\\学习工作\\搞点研究\\投论文\\融合物理信息的区域采样\\crimes-mixed-response\\results\\figures\\karma_c9_strict_valid_spatial\\C10_seed172_strict_valid_spatial.png"
+  ],
+  "note": "One predeclared formal seed for visual diagnosis; not an eight-seed average."
+}

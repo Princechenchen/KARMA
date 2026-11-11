@@ -1,0 +1,22 @@
+{
+  "runs": 40,
+  "alpha_rows": 400,
+  "paired_rows": 30,
+  "summary_rows": 4,
+  "target_cells": 659,
+  "prior_cells": 657,
+  "incidents": 233049,
+  "seeds": [
+    34,
+    46,
+    77,
+    136,
+    160,
+    172,
+    180,
+    2159,
+    6790,
+    7416
+  ],
+  "status": "COMPLETE"
+}

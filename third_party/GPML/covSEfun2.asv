@@ -1,0 +1,39 @@
+%协方差函数（平方指数协方差函数）
+
+function [K,dist_matrix] = covSEfun2(hyp,x1,x2)
+%     sf = hyp(2); ell= hyp(3:end);
+%     m=size(x1,1);n=size(x2,1);
+%     dist_matrix=ones(m,n);%距离矩阵
+% %     for i=1:m
+% %         for j=1:n
+% %             dist_matix(i,j)=sum((x1(i,:)-x2(j,:)).^2);    
+% %             if (i==j)
+% %             K(i,j)=sf^2.*exp(-dist_matix(i,j)/2/(ell^2));
+% %             else
+% %             K(i,j)=sf^2.*exp(-dist_matix(i,j)/2/(ell^2));    
+% %             end
+% %         end
+% %     end
+%     [row,col] = ind2sub([m,n],1:m*n);
+%     dist = sum((x1(row,:)-x2(col,:)).^2,2); 
+%     dist_matrix = reshape(dist,[m,n]);
+%     K = sf^2.*exp(-dist_matrix/2/(ell^2));
+
+    sf = hyp(2); ell= hyp(3:end);
+    m=size(x1,1);n=size(x2,1);
+    dist_matrix=ones(m,n);%距离矩阵
+%     for i=1:m
+%         for j=1:n
+%             dist_matix(i,j)=sum((x1(i,:)-x2(j,:)).^2);    
+%             if (i==j)
+%             K(i,j)=sf^2.*exp(-dist_matix(i,j)/2/(ell^2));
+%             else
+%             K(i,j)=sf^2.*exp(-dist_matix(i,j)/2/(ell^2));    
+%             end
+%         end
+%     end
+    [row,col] = ind2sub([m,n],1:m*n);
+    dist = sum((x1(row,:)-x2(col,:)).^2.*1./ell.^2,2); 
+    dist_matrix = reshape(dist,[m,n]);
+    K = sf^2.*exp(-dist_matrix/2);
+end
