@@ -32,6 +32,10 @@ paper_output/ Cross-case figure scripts
 
 Every case folder contains a `*_final10.mat` (or `*_repro.mat`) archive with the runs of all compared methods on the evaluated ten seeds (one variable per arm, holding per-step trajectories), matching the numbers reported in the paper.
 
+## Supplementary material
+
+ (10 pages) contains: the detailed data-source descriptions for all six cases, the knowledge-field construction with formulas, the MSPSO region-identification algorithm and its full parameter settings (Sec. III), the baseline method principles, the extended HPO-mixed comparison (Table V, Fig. 4), the complete Chicago crime results (Table VI, Figs. 5-6), and the reproducibility statement.
+
 ## Notes
 
 - The Crime case is self-contained in Python; see `Crime/README.md`.
